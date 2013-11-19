@@ -1,0 +1,32 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    activesupport (3.0.0)
+    atomic (1.1.14-java)
+    columnize (0.3.6)
+    json (1.8.1-java)
+    ruby-debug (0.10.4)
+      columnize (>= 0.1)
+      ruby-debug-base (~> 0.10.4.0)
+    ruby-debug-base (0.10.4-java)
+    thread_safe (0.1.3-java)
+      atomic
+    twitter_cldr (2.4.2)
+      json
+      tzinfo
+    tzinfo (1.1.0)
+      thread_safe (~> 0.1)
+    unf (0.1.3-java)
+    unicode_utils (1.4.0)
+
+PLATFORMS
+  java
+
+DEPENDENCIES
+  activesupport
+  debugger
+  ruby-debug
+  twitter_cldr
+  unf
+  unicode
+  unicode_utils
