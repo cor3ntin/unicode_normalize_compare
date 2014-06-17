@@ -21,7 +21,7 @@ require 'unf'
 
 normalizations = {}
 
-normalizations[:active_support] = lambda do |str, form|
+normalizations[:activesupport] = lambda do |str, form|
   # activesupport wants just :c, :kc, :d, or :kd
   form = form.to_s.slice(2, form.length).to_sym
   ActiveSupport::Multibyte::Unicode.normalize(str, form)
@@ -64,7 +64,7 @@ normalizations[:unf] = lambda do |str, form|
 end
 
 if unicode_gem_avail 
-  normalizations[:unicode_gem] = lambda do |str, form|
+  normalizations[:unicode] = lambda do |str, form|
     case form
     when :nfc
       UnicodeGem::nfc(str)
@@ -80,8 +80,8 @@ if unicode_gem_avail
   end
 end
 
-alternatives = [:unicode_utils, :active_support, :twitter_cldr, :unf]
-alternatives.push :unicode_gem if unicode_gem_avail
+alternatives = [:unicode_utils, :activesupport, :twitter_cldr, :unf]
+alternatives.push :unicode if unicode_gem_avail
 
 
 require 'benchmark'
@@ -92,7 +92,7 @@ test_data_array = File.open(File.expand_path("../test_utf8.txt", __FILE__), "r:U
 
 Benchmark.bmbm do |x|
   alternatives.each do |alt|
-    x.report(alt) do
+    x.report(alt.to_s + " " + Gem.loaded_specs[alt.to_s].version.to_s) do
       iterations.times do
         test_data_array.each do |line|
           str = normalizations[alt].call(line, :nfc)
