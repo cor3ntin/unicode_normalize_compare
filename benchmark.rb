@@ -47,13 +47,13 @@ normalizations[:twitter_cldr] = lambda do |str, form|
   # eg TwitterCldr::Normalization::NFD.normalize("français") 
   case form
   when :nfc
-    TwitterCldr::Normalization::NFC.normalize(str)
+    TwitterCldr::Normalization.normalize(str, using: :nfc)
   when :nfkc
-    TwitterCldr::Normalization::NFKC.normalize(str)
+    TwitterCldr::Normalization.normalize(str, using: :nfkc)
   when :nfd
-    TwitterCldr::Normalization::NFD.normalize(str)
+    TwitterCldr::Normalization.normalize(str, using: :nfd)
   when :nfkd
-    TwitterCldr::Normalization::NFKD.normalize(str)
+    TwitterCldr::Normalization.normalize(str, using: :nfkd)
   else
     raise ArgumentError
   end
